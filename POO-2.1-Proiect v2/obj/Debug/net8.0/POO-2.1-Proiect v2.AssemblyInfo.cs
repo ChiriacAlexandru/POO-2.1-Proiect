@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("POO-2.1-Proiect v2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+76f48e1b33ab77876fefdca889ada4667302ec0f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6bfbf1bcb8dde19bd2517f6b15bae57f533ab597")]
 [assembly: System.Reflection.AssemblyProductAttribute("POO-2.1-Proiect v2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("POO-2.1-Proiect v2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
