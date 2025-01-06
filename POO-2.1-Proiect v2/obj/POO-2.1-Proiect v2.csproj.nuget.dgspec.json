@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TageStudio\\source\\repos\\v@\\POO-2.1-Proiect v2\\POO-2.1-Proiect v2.csproj": {}
+    "C:\\Users\\copil\\Source\\Repos\\ChiriacAlexandru\\POO-2.1-Proiect\\POO-2.1-Proiect v2\\POO-2.1-Proiect v2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TageStudio\\source\\repos\\v@\\POO-2.1-Proiect v2\\POO-2.1-Proiect v2.csproj": {
+    "C:\\Users\\copil\\Source\\Repos\\ChiriacAlexandru\\POO-2.1-Proiect\\POO-2.1-Proiect v2\\POO-2.1-Proiect v2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TageStudio\\source\\repos\\v@\\POO-2.1-Proiect v2\\POO-2.1-Proiect v2.csproj",
+        "projectUniqueName": "C:\\Users\\copil\\Source\\Repos\\ChiriacAlexandru\\POO-2.1-Proiect\\POO-2.1-Proiect v2\\POO-2.1-Proiect v2.csproj",
         "projectName": "POO-2.1-Proiect v2",
-        "projectPath": "C:\\Users\\TageStudio\\source\\repos\\v@\\POO-2.1-Proiect v2\\POO-2.1-Proiect v2.csproj",
-        "packagesPath": "C:\\Users\\TageStudio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TageStudio\\source\\repos\\v@\\POO-2.1-Proiect v2\\obj\\",
+        "projectPath": "C:\\Users\\copil\\Source\\Repos\\ChiriacAlexandru\\POO-2.1-Proiect\\POO-2.1-Proiect v2\\POO-2.1-Proiect v2.csproj",
+        "packagesPath": "C:\\Users\\copil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\copil\\Source\\Repos\\ChiriacAlexandru\\POO-2.1-Proiect\\POO-2.1-Proiect v2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\TageStudio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\copil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
