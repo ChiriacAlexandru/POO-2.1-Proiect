@@ -8,8 +8,8 @@ namespace POO_2._1_Proiect_v2
 {
     public class Sala
     {
-        public int Id { get; set; }
-        public int Capacitate { get; set; }
+        public int Id;
+        public int Capacitate;
         public Sala(int id, int capacitate)
         {
             Id = id;
