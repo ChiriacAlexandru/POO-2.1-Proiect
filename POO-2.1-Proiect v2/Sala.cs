@@ -22,7 +22,7 @@ namespace POO_2._1_Proiect_v2
         }
         public static Sala FromString(string line)
         {
-            var parts=line.Split(' ');
+            var parts=line.Split(',');
             return new Sala(int.Parse(parts[0]),int.Parse(parts[1]));
         }
 

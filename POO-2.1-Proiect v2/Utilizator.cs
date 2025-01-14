@@ -15,5 +15,14 @@ public class Utilizator
         IsAdmin= isAdmin;
 
     }
+    public override string ToString()
+    {
+        return $"{Nume},{Prenume},{Email},{Parola},{IsAdmin}";
+    }
+    public static Utilizator FromString(string line)
+    {
+        var parts = line.Split(',');
+        return new Utilizator(parts[0], parts[1], parts[2], parts[3], bool.Parse(parts[4]));
+    }
 
 }
