@@ -13,4 +13,13 @@
         DataSfarsit = dataSfarsit;
         SalaId = salaId;
     }
+    public override string ToString()
+    {
+        return $"{Id},{Nume},{DataStart},{DataSfarsit},{SalaId}";
+    }
+    public static Film FromString(string line)
+    {
+        var parts = line.Split(',');
+        return new Film(int.Parse(parts[0]), parts[1], DateTime.Parse(parts[2]), DateTime.Parse(parts[3]), int.Parse(parts[4]));
+    }
 }
