@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using POO_2._1_Proiect_v2;
 
 namespace CinemaApp
 {
@@ -24,10 +26,11 @@ namespace CinemaApp
 
             Console.WriteLine("Bine ai venit la CinemaApp");
             Console.WriteLine("Alege o optiune:");
-            Console.WriteLine("1.Inregistrare:");
-            Console.WriteLine("2.Logare:");
-            string optinueInregistrareLogare = Console.ReadLine();
-            switch (optinueInregistrareLogare)
+            Console.WriteLine("1. Inregistrare");
+            Console.WriteLine("2. Logare");
+            string optiune = Console.ReadLine();
+
+            switch (optiune)
             {
                 case "1":
                     Console.WriteLine("Introduceti numele:");
@@ -38,12 +41,12 @@ namespace CinemaApp
                     string email = Console.ReadLine();
                     Console.WriteLine("Introduceti parola:");
                     string parola = Console.ReadLine();
-                    Console.WriteLine("Introduceti daca este admin sau nu:");
+                    Console.WriteLine("Sunteti admin? (da/nu):");
                     bool isAdmin = Console.ReadLine().ToLower() == "da";
                     utilizatorCurent = new Utilizator(nume, prenume, email, parola, isAdmin);
                     utilizatori.Add(utilizatorCurent);
                     File.WriteAllLines(utilizatoriFisier, utilizatori.Select(u => u.ToString()));
-                    Console.WriteLine("Inregistrare cu succes!Te poti loga acum");
+                    Console.WriteLine("Inregistrare cu succes! Te poti loga acum.");
                     break;
                 case "2":
                     Console.WriteLine("Introduceti email:");
@@ -65,64 +68,65 @@ namespace CinemaApp
                     Console.WriteLine("Optiune invalida!");
                     return;
             }
-                        if (utilizatorCurent.IsAdmin)
+
+            if (utilizatorCurent.IsAdmin)
             {
-                AdminMenu(cinema, saliFisier, filmeFisier, utilizatoriFisier, utilizatorCurent);
+                AdminMenu(cinema, saliFisier, filmeFisier);
             }
             else
             {
-                ClientMenu(cinema, utilizatorCurent);
+                ClientMenu(cinema);
             }
         }
 
-        static void AdminMenu(Cinema cinema, string saliFisier, string filmeFisier, string utilizatoriFisier, Utilizator admin)
+        static void AdminMenu(Cinema cinema, string saliFisier, string filmeFisier)
         {
             while (true)
             {
                 Console.WriteLine("\n--- Panou Admin ---");
-                Console.WriteLine("1. Adaugă sală");
-                Console.WriteLine("2. Adaugă film");
-                Console.WriteLine("3. Vizualizează filme disponibile");
-                Console.WriteLine("4. Vizualizează rezervări");
-                Console.WriteLine("5. Șterge rezervare");
-                Console.WriteLine("6. Ieșire");
+                Console.WriteLine("1. Adauga sala");
+                Console.WriteLine("2. Adauga film");
+                Console.WriteLine("3. Vizualizeaza filme");
+                Console.WriteLine("4. Vizualizeaza rezervari");
+                Console.WriteLine("5. Sterge rezervare");
+                Console.WriteLine("6. Iesire");
 
                 string optiune = Console.ReadLine();
 
                 switch (optiune)
                 {
                     case "1":
-                        Console.Write("ID sală: ");
+                        Console.WriteLine("ID sala:");
                         int id = int.Parse(Console.ReadLine());
-                        Console.Write("Capacitate: ");
+                        Console.WriteLine("Capacitate:");
                         int capacitate = int.Parse(Console.ReadLine());
                         cinema.Sali.Add(new Sala(id, capacitate));
                         cinema.SalveazaSali(saliFisier);
-                        Console.WriteLine("Sală adăugată cu succes.");
+                        Console.WriteLine("Sala adaugata cu succes.");
                         break;
 
                     case "2":
-                        Console.Write("Nume film: ");
+                        Console.WriteLine("Nume film:");
                         string nume = Console.ReadLine();
-                        Console.Write("Data start (yyyy-MM-dd HH:mm): ");
+                        Console.WriteLine("Data start (yyyy-MM-dd HH:mm):");
                         DateTime start = DateTime.Parse(Console.ReadLine());
-                        Console.Write("Data end (yyyy-MM-dd HH:mm): ");
+                        Console.WriteLine("Data sfarsit (yyyy-MM-dd HH:mm):");
                         DateTime end = DateTime.Parse(Console.ReadLine());
 
-                        Console.WriteLine("Săli disponibile:");
+                        Console.WriteLine("Sali disponibile:");
                         foreach (var sala in cinema.Sali)
                         {
                             Console.WriteLine($"ID: {sala.Id}, Capacitate: {sala.Capacitate}");
                         }
 
-                        Console.Write("Alege ID sală: ");
+                        Console.WriteLine("Alege ID sala:");
                         int salaId = int.Parse(Console.ReadLine());
 
                         try
                         {
                             cinema.AdaugaFilm(new Film(cinema.Filme.Count + 1, nume, start, end, salaId));
                             cinema.SalveazaFilme(filmeFisier);
-                            Console.WriteLine("Film adăugat cu succes.");
+                            Console.WriteLine("Film adaugat cu succes.");
                         }
                         catch (Exception ex)
                         {
@@ -139,7 +143,7 @@ namespace CinemaApp
                         break;
 
                     case "4":
-                        Console.WriteLine("\nRezervările existente:");
+                        Console.WriteLine("\nRezervarile existente:");
                         foreach (var rezervare in cinema.Rezervari)
                         {
                             Console.WriteLine(rezervare.ToString());
@@ -147,17 +151,17 @@ namespace CinemaApp
                         break;
 
                     case "5":
-                        Console.Write("Introduceti ID-ul rezervarii de șters: ");
+                        Console.WriteLine("Introduceti ID-ul rezervarii de sters:");
                         int rezervareId = int.Parse(Console.ReadLine());
                         var rezervareDeSters = cinema.Rezervari.FirstOrDefault(r => r.FilmId == rezervareId);
                         if (rezervareDeSters != null)
                         {
                             cinema.Rezervari.Remove(rezervareDeSters);
-                            Console.WriteLine("Rezervare ștearsă cu succes.");
+                            Console.WriteLine("Rezervare stearsa cu succes.");
                         }
                         else
                         {
-                            Console.WriteLine("Rezervarea nu a fost găsită.");
+                            Console.WriteLine("Rezervarea nu a fost gasita.");
                         }
                         break;
 
@@ -165,20 +169,20 @@ namespace CinemaApp
                         return;
 
                     default:
-                        Console.WriteLine("Opțiune invalidă.");
+                        Console.WriteLine("Optiune invalida.");
                         break;
                 }
             }
         }
 
-        static void ClientMenu(Cinema cinema, Utilizator client)
+        static void ClientMenu(Cinema cinema)
         {
             while (true)
             {
                 Console.WriteLine("\n--- Meniu Client ---");
-                Console.WriteLine("1. Vizualizează filme disponibile");
-                Console.WriteLine("2. Rezervă locuri");
-                Console.WriteLine("3. Ieșire");
+                Console.WriteLine("1. Vizualizeaza filme disponibile");
+                Console.WriteLine("2. Rezerva locuri");
+                Console.WriteLine("3. Iesire");
 
                 string optiune = Console.ReadLine();
 
@@ -193,15 +197,15 @@ namespace CinemaApp
                         break;
 
                     case "2":
-                        Console.Write("Introduceti ID film: ");
+                        Console.WriteLine("Introduceti ID film:");
                         int filmId = int.Parse(Console.ReadLine());
-                        Console.Write("Numar locuri: ");
+                        Console.WriteLine("Numar locuri:");
                         int locuri = int.Parse(Console.ReadLine());
 
                         try
                         {
-                            cinema.AdaugaRezervare(new Rezervare(filmId, client.Nume, locuri));
-                            Console.WriteLine("Rezervare realizată cu succes.");
+                            cinema.AdaugareRezervare(new Rezervare(filmId, "Client", locuri));
+                            Console.WriteLine("Rezervare realizata cu succes.");
                         }
                         catch (Exception ex)
                         {
@@ -213,14 +217,10 @@ namespace CinemaApp
                         return;
 
                     default:
-                        Console.WriteLine("Opțiune invalidă.");
+                        Console.WriteLine("Optiune invalida.");
                         break;
                 }
             }
-        }
-    }
-}
-
         }
     }
 }
