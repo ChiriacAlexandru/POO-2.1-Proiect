@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POO_2._1_Proiect_v2
 {
@@ -11,34 +10,49 @@ namespace POO_2._1_Proiect_v2
         public List<Sala> Sali { get; private set; } = new List<Sala>();
         public List<Film> Filme { get; private set; } = new List<Film>();
         public List<Rezervare> Rezervari { get; private set; } = new List<Rezervare>();
+
         public void IncarcaSali(string fisier)
         {
             if (File.Exists(fisier))
-
                 Sali = File.ReadAllLines(fisier).Select(Sala.FromString).ToList();
-
         }
+
         public void SalveazaSali(string fisier)
         {
             File.WriteAllLines(fisier, Sali.Select(s => s.ToString()));
         }
+
+        public void IncarcaFilme(string fisier)
+        {
+            if (File.Exists(fisier))
+                Filme = File.ReadAllLines(fisier).Select(Film.FromString).ToList();
+        }
+
+        public void SalveazaFilme(string fisier)
+        {
+            File.WriteAllLines(fisier, Filme.Select(f => f.ToString()));
+        }
+
         public void AdaugaFilm(Film film)
         {
-            if (!Filme.Any(f => f.SalaId == film.SalaId && ((film.DataStart >= f.DataStart && film.DataStart < f.DataSfarsit) || (film.DataSfarsit > f.DataStart && film.DataSfarsit <= f.DataSfarsit))))
+            if (!Filme.Any(f => f.SalaId == film.SalaId &&
+                ((film.DataStart >= f.DataStart && film.DataStart < f.DataSfarsit) ||
+                (film.DataSfarsit > f.DataStart && film.DataSfarsit <= f.DataSfarsit))))
             {
                 Filme.Add(film);
             }
             else
-                throw new Exception("Sala este deja rezervata pentru aceasta perioada.");
+            {
+                throw new Exception("Sala este deja rezervată pentru această perioadă.");
+            }
         }
-
 
         public void AdaugareRezervare(Rezervare rezervare)
         {
             var film = Filme.FirstOrDefault(f => f.Id == rezervare.FilmId);
-            if(film != null)
+            if (film != null)
             {
-                var sala=Sali.FirstOrDefault(s=>s.Id == film.SalaId);
+                var sala = Sali.FirstOrDefault(s => s.Id == film.SalaId);
                 if (sala != null)
                 {
                     int locuriRezervate = Rezervari.Where(r => r.FilmId == rezervare.FilmId).Sum(r => r.NumarLocuri);
@@ -49,12 +63,11 @@ namespace POO_2._1_Proiect_v2
                     else
                     {
                         throw new Exception("Numarul de locuri rezervate depaseste capacitatea salii.");
-                  
                     }
                 }
-                else 
+                else
                 {
-                   throw new Exception("Sala nu exista.");
+                    throw new Exception("Sala nu exista.");
                 }
             }
             else
@@ -62,6 +75,5 @@ namespace POO_2._1_Proiect_v2
                 throw new Exception("Filmul nu exista.");
             }
         }
-
     }
 }
