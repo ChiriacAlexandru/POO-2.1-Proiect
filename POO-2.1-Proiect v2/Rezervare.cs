@@ -1,21 +1,27 @@
-﻿public class Rezervare
+namespace POO_2._1_Proiect_v2
 {
-    public int FilmId;
-    public string NumeClient;
-    public int NumarLocuri;
-    public Rezervare(int filmId, string numeClient, int numarLocuri)
+    public class Rezervare
     {
-        FilmId = filmId;
-        NumeClient = numeClient;
-        NumarLocuri = numarLocuri;
-    }
-    public override string ToString()
-    {
-        return $"{FilmId},{NumeClient},{NumarLocuri}";
-    }
-    public static Rezervare FromString(string line)
-    {
-        var parts = line.Split(',');
-        return new Rezervare(int.Parse(parts[0]), parts[1], int.Parse(parts[2]));
+        public int FilmId { get; set; }
+        public string NumeClient { get; set; }
+        public int NumarLocuri { get; set; }
+
+        public Rezervare(int filmId, string numeClient, int numarLocuri)
+        {
+            FilmId = filmId;
+            NumeClient = numeClient;
+            NumarLocuri = numarLocuri;
+        }
+
+        public override string ToString()
+        {
+            return $"{FilmId},{NumeClient},{NumarLocuri}";
+        }
+
+        public static Rezervare FromString(string line)
+        {
+            var parts = line.Split(',');
+            return new Rezervare(int.Parse(parts[0]), parts[1], int.Parse(parts[2]));
+        }
     }
 }
