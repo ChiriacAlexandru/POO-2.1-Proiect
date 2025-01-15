@@ -50,7 +50,7 @@ namespace POO_2._1_Proiect_v2
                     {
                         throw new Exception("Numarul de locuri rezervate depaseste capacitatea salii.");
                   
-                   }
+                    }
                 }
                 else 
                 {
